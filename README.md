@@ -2,6 +2,12 @@
 
 A lightweight, local SMTP server for testing email functionality in your applications. Capture, inspect, and debug emails with a modern web interface.
 
+<p align="center">
+  <img src="docs/images/landing-page.png" alt="Landing Page" width="45%">
+  &nbsp; &nbsp; &nbsp;
+  <img src="docs/images/inbox.png" alt="Inbox View" width="45%">
+</p>
+
 ## Features
 
 - **Local SMTP Server**: Listens on port `1025` for easy integration.
