@@ -1,97 +1,78 @@
-# SMTP Server
+# Laravel SMTP Server
 
-Local SMTP server for email testing. Capture and inspect emails with a beautiful web interface.
-
-![Laravel](https://img.shields.io/badge/Laravel-12-red) ![React](https://img.shields.io/badge/React-19-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan)
+A lightweight, local SMTP server for testing email functionality in your applications. Capture, inspect, and debug emails with a modern web interface.
 
 ## Features
 
-- 📧 Local SMTP server (port 1025)
-- 🌐 Web interface for viewing emails
-- 🔍 Search emails
-- 📎 Download attachments
-- 🗑️ Delete emails
-- 📱 Responsive design
+- **Local SMTP Server**: Listens on port `1025` for easy integration.
+- **Modern Web Interface**: Clean, responsive UI built with React and Tailwind CSS.
+- **Developer Tools**: View HTML source, raw headers, and variable inspection.
+- **Auto-Configuration**: Copy-paste ready code snippets for Laravel, Node.js, Python, and more.
+- **Dark Mode**: Built-in dark and light themes.
 
-## Quick Start
+## Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone <repository-url>
+    cd smtp-server
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3.  **Configure environment**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    php artisan migrate
+    ```
+
+## Usage
+
+### 1. Start the Server
+Run the following command to start both the SMTP server and the web interface:
 
 ```bash
-# Install dependencies
-composer install
-npm install
-
-# Setup
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-
-# Start SMTP server
 php artisan smtp:serve
-
-# Start web interface (separate terminal)
-npm run dev
 ```
 
-Visit **http://smtp.test**
+*   **SMTP Port**: `1025`
+*   **Web Interface**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## Configuration
+### 2. Configure Your Application
+Point your application's mail settings to the local server.
 
-Point your app to the SMTP server:
-
-```
-Host: 127.0.0.1
-Port: 1025
-Encryption: None
-Authentication: None
-```
-
-### Laravel Example
-
-```env
+**Laravel (.env):**
+```dotenv
 MAIL_MAILER=smtp
 MAIL_HOST=127.0.0.1
 MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 ```
 
-### Test Email
-
-```bash
-php test-email.php
+**Nodemailer (Node.js):**
+```javascript
+const transport = nodemailer.createTransport({
+  host: "127.0.0.1",
+  port: 1025,
+  secure: false
+});
 ```
 
-## API Endpoints
-
-```
-GET    /api/emails              # List emails
-GET    /api/emails/{id}         # View email
-DELETE /api/emails/{id}         # Delete email
-DELETE /api/emails              # Delete all
-GET    /api/emails/{id}/source  # Raw source
-```
+For more examples (Curl, Go, Python, PHP), visit the **Quick Start** section on the landing page.
 
 ## Tech Stack
 
-- **Backend:** Laravel 12, ReactPHP, SQLite
-- **Frontend:** React 19, Inertia.js, shadcn/ui, Tailwind CSS
-
-## Development
-
-```bash
-# Run tests
-php artisan test
-
-# Format code
-vendor/bin/pint
-
-# Build for production
-npm run build
-```
-
-## Security Warning
-
-⚠️ **Development only!** Do not use in production or expose to public networks.
+-   **Backend**: Laravel 12, ReactPHP
+-   **Frontend**: React 19, Inertia.js, Tailwind CSS v4, shadcn/ui
+-   **Database**: SQLite
 
 ## License
 
-MIT
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
