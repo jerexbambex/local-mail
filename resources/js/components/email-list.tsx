@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { Mail, Paperclip } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface Email {
     id: string;
@@ -27,7 +29,7 @@ export function EmailList({ searchQuery, selectedEmailId, onSelectEmail }: Email
             setLoading(true);
             const params = new URLSearchParams();
             if (searchQuery) params.append('search', searchQuery);
-            
+
             const response = await fetch(`/api/emails?${params}`);
             const data = await response.json();
             setEmails(data.data);
@@ -40,15 +42,19 @@ export function EmailList({ searchQuery, selectedEmailId, onSelectEmail }: Email
     }, [searchQuery]);
 
     if (loading) {
-        return <div className="w-full md:w-96 border-r p-4">Loading...</div>;
+        return (
+            <div className="flex h-full items-center justify-center p-4">
+                <div className="text-sm text-muted-foreground">Loading...</div>
+            </div>
+        );
     }
 
     return (
-        <div className="w-full md:w-96 border-r overflow-y-auto">
-            <div className="divide-y">
+        <ScrollArea className="h-full">
+            <div className="flex flex-col gap-2 p-4 pt-0">
                 {emails.length === 0 ? (
-                    <div className="p-8 text-center text-muted-foreground">
-                        No emails yet
+                    <div className="text-center text-muted-foreground py-8">
+                        No emails found
                     </div>
                 ) : (
                     emails.map((email) => (
@@ -56,31 +62,48 @@ export function EmailList({ searchQuery, selectedEmailId, onSelectEmail }: Email
                             key={email.id}
                             onClick={() => onSelectEmail(email.id)}
                             className={cn(
-                                'w-full p-4 text-left transition-colors hover:bg-muted',
-                                selectedEmailId === email.id && 'bg-muted',
-                                !email.read_at && 'font-semibold'
+                                'flex flex-col items-start gap-2 rounded-xl border p-4 text-left text-sm transition-all hover:bg-white/5 hover:border-white/10',
+                                selectedEmailId === email.id
+                                    ? 'bg-white/10 border-white/20 shadow-lg'
+                                    : 'border-transparent bg-transparent'
                             )}
                         >
-                            <div className="flex items-start justify-between gap-2">
-                                <div className="flex items-center gap-2 min-w-0 flex-1">
-                                    <Mail className="h-4 w-4 shrink-0" />
-                                    <span className="truncate text-sm">{email.from}</span>
+                            <div className="flex w-full flex-col gap-1">
+                                <div className="flex items-center">
+                                    <div className="flex items-center gap-2">
+                                        <div className="font-semibold text-foreground">
+                                            {email.from}
+                                        </div>
+                                        {!email.read_at && (
+                                            <span className="flex h-2 w-2 rounded-full bg-blue-600" />
+                                        )}
+                                    </div>
+                                    <div className="ml-auto text-xs text-muted-foreground">
+                                        {new Date(email.created_at).toLocaleTimeString([], {
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                        })}
+                                    </div>
                                 </div>
-                                {email.attachments_count > 0 && (
-                                    <Paperclip className="h-4 w-4 shrink-0 text-muted-foreground" />
-                                )}
+                                <div className="text-xs font-medium text-foreground">
+                                    {email.subject || '(No Subject)'}
+                                </div>
                             </div>
-                            <div className="mt-1 truncate text-sm">{email.subject || '(No Subject)'}</div>
-                            <div className="mt-1 truncate text-xs text-muted-foreground">
-                                {email.text_body?.substring(0, 100)}
+                            <div className="line-clamp-2 text-xs text-muted-foreground">
+                                {email.text_body?.substring(0, 300)}
                             </div>
-                            <div className="mt-2 text-xs text-muted-foreground">
-                                {new Date(email.created_at).toLocaleString()}
-                            </div>
+                            {email.attachments_count > 0 && (
+                                <div className="flex items-center gap-2">
+                                    <Badge variant="secondary" className="px-1 font-normal">
+                                        <Paperclip className="mr-1 h-3 w-3" />
+                                        Attachment
+                                    </Badge>
+                                </div>
+                            )}
                         </button>
                     ))
                 )}
             </div>
-        </div>
+        </ScrollArea>
     );
 }

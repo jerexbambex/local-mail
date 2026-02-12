@@ -5,8 +5,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('inbox');
+    return Inertia::render('welcome');
 })->name('home');
+
+Route::get('/inbox', function () {
+    return Inertia::render('inbox');
+})->name('inbox');
 
 Route::prefix('api')->group(function () {
     Route::delete('/emails', [EmailController::class, 'destroyAll']);
@@ -16,4 +20,6 @@ Route::prefix('api')->group(function () {
     Route::get('/emails/{email}/source', [EmailController::class, 'source']);
     Route::get('/emails/{email}/attachments/{attachmentId}', [EmailController::class, 'downloadAttachment']);
     Route::get('/stats', [EmailController::class, 'stats']);
+    Route::put('/emails/{email}/unread', [EmailController::class, 'unread']);
+    Route::get('/emails/{email}/download', [EmailController::class, 'download']);
 });

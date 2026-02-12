@@ -77,4 +77,17 @@ class EmailController extends Controller
             'total_size' => Email::sum('size'),
         ]);
     }
+    public function unread(Email $email): JsonResponse
+    {
+        $email->update(['read_at' => null]);
+
+        return response()->json(['message' => 'Email marked as unread']);
+    }
+
+    public function download(Email $email): mixed
+    {
+        return response($email->raw_message)
+            ->header('Content-Type', 'message/rfc822')
+            ->header('Content-Disposition', 'attachment; filename="email-'.$email->id.'.eml"');
+    }
 }

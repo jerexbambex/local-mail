@@ -35,17 +35,17 @@ export function SearchBar({ searchQuery, onSearchChange, onClearAll }: SearchBar
 
     return (
         <>
-            <div className="flex flex-1 items-center gap-2 md:gap-4">
+            <div className="flex items-center gap-2">
                 <Input
                     type="search"
-                    placeholder="Search..."
+                    placeholder="Search emails..."
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
                     className="max-w-md"
                 />
-                <Button variant="destructive" size="sm" onClick={() => setShowClearDialog(true)} className="ml-auto shrink-0">
-                    <Trash2 className="h-4 w-4 md:mr-2" />
-                    <span className="hidden md:inline">Clear All</span>
+                <Button variant="outline" size="sm" onClick={() => setShowClearDialog(true)}>
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Clear All
                 </Button>
             </div>
 
