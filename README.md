@@ -2,8 +2,11 @@
 
 A lightweight, local SMTP server for testing email functionality in your applications. Capture, inspect, and debug emails with a modern web interface.
 
-<img width="1624" height="1061" alt="Screenshot 2026-02-12 at 11 52 52 AM" src="https://github.com/user-attachments/assets/44264f0f-3b98-4e38-b089-23abd2b6b579" />
-<img width="1624" height="1061" alt="Screenshot 2026-02-12 at 11 53 56 AM" src="https://github.com/user-attachments/assets/88600fa8-1309-491c-a018-d7ab78e768e1" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/44264f0f-3b98-4e38-b089-23abd2b6b579" alt="Landing Page" width="45%">
+  &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/user-attachments/assets/88600fa8-1309-491c-a018-d7ab78e768e1" alt="Inbox View" width="45%">
+</p>
 
 
 ## Features
