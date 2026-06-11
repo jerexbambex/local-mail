@@ -1,8 +1,8 @@
+import { Paperclip } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Mail, Paperclip } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 interface Email {
     id: string;
@@ -25,15 +25,24 @@ export function EmailList({ searchQuery, selectedEmailId, onSelectEmail }: Email
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        let isInitial = true;
+
         const fetchEmails = async () => {
-            setLoading(true);
+            if (isInitial) {
+                setLoading(true);
+            }
+
             const params = new URLSearchParams();
             if (searchQuery) params.append('search', searchQuery);
 
             const response = await fetch(`/api/emails?${params}`);
             const data = await response.json();
             setEmails(data.data);
-            setLoading(false);
+
+            if (isInitial) {
+                setLoading(false);
+                isInitial = false;
+            }
         };
 
         fetchEmails();
