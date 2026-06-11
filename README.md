@@ -1,4 +1,4 @@
-# Laravel SMTP Server
+# Local SMTP Server
 
 A lightweight, local SMTP server for testing email functionality in your applications. Capture, inspect, and debug emails with a modern web interface.
 
