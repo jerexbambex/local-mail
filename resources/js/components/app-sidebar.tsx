@@ -1,8 +1,9 @@
 "use client"
 
-import * as React from "react"
 import { Mail } from "lucide-react"
+import * as React from "react"
 
+import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -12,10 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarSeparator,
 } from "@/components/ui/sidebar"
-import { NavUser } from "@/components/nav-user"
-import { Button } from "@/components/ui/button"
 
 // This is sample data. In a real app, you'd fetch this from your backend.
 const data = {

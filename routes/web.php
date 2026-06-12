@@ -15,6 +15,8 @@ Route::get('/inbox', function () {
 Route::prefix('api')->group(function () {
     Route::delete('/emails', [EmailController::class, 'destroyAll']);
     Route::get('/emails', [EmailController::class, 'index']);
+    Route::post('/emails/bulk-delete', [EmailController::class, 'bulkDestroy']);
+    Route::post('/emails/bulk-unread', [EmailController::class, 'bulkUnread']);
     Route::get('/emails/{email}', [EmailController::class, 'show']);
     Route::delete('/emails/{email}', [EmailController::class, 'destroy']);
     Route::get('/emails/{email}/source', [EmailController::class, 'source']);

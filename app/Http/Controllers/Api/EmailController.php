@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BulkEmailRequest;
 use App\Models\Email;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -57,6 +58,35 @@ class EmailController extends Controller
         return response()->json(['message' => 'All emails deleted']);
     }
 
+    public function bulkDestroy(BulkEmailRequest $request): JsonResponse
+    {
+        $emails = Email::query()
+            ->whereKey($request->emailIds())
+            ->get();
+
+        foreach ($emails as $email) {
+            Storage::deleteDirectory('attachments/'.$email->id);
+            $email->delete();
+        }
+
+        return response()->json([
+            'message' => 'Selected emails deleted',
+            'count' => $emails->count(),
+        ]);
+    }
+
+    public function bulkUnread(BulkEmailRequest $request): JsonResponse
+    {
+        $count = Email::query()
+            ->whereKey($request->emailIds())
+            ->update(['read_at' => null]);
+
+        return response()->json([
+            'message' => 'Selected emails marked as unread',
+            'count' => $count,
+        ]);
+    }
+
     public function source(Email $email): JsonResponse
     {
         return response()->json(['source' => $email->raw_message]);
@@ -77,6 +107,7 @@ class EmailController extends Controller
             'total_size' => Email::sum('size'),
         ]);
     }
+
     public function unread(Email $email): JsonResponse
     {
         $email->update(['read_at' => null]);
