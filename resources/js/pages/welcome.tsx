@@ -1,11 +1,10 @@
 import { Head, Link } from '@inertiajs/react';
-import { Mail, Server, ArrowRight, Copy, Check, Terminal, Code2 } from 'lucide-react';
+import { Mail, ArrowRight, Copy, Check, Terminal } from 'lucide-react';
+import { useState } from 'react';
+import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ModeToggle } from '@/components/mode-toggle';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
 
 export default function Welcome() {
     return (
