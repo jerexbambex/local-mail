@@ -1,3 +1,5 @@
+import { RefreshCw, Search, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -10,8 +12,6 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { RefreshCw, Search, Trash2 } from 'lucide-react';
-import { useState } from 'react';
 
 interface SearchBarProps {
     searchQuery: string;

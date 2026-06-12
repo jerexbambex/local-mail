@@ -1,3 +1,6 @@
+import { Head, Link } from '@inertiajs/react';
+import { Activity, CheckSquare, Inbox as InboxIcon, Mail, MailOpen, Server, Trash2 } from 'lucide-react';
+import { useCallback, useState } from 'react';
 import { EmailList } from '@/components/email-list';
 import { EmailViewer } from '@/components/email-viewer';
 import { ModeToggle } from '@/components/mode-toggle';
@@ -5,9 +8,6 @@ import { SearchBar } from '@/components/search-bar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Head, Link } from '@inertiajs/react';
-import { Activity, CheckSquare, Inbox as InboxIcon, Mail, MailOpen, Server, Trash2 } from 'lucide-react';
-import { useCallback, useState } from 'react';
 
 export default function Inbox() {
     const [selectedEmail, setSelectedEmail] = useState<string | null>(null);

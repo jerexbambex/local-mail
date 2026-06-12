@@ -1,9 +1,9 @@
+import { CheckSquare, Mail, MailOpen, Paperclip, Square } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { CheckSquare, Mail, MailOpen, Paperclip, Square } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 interface Email {
     id: string;

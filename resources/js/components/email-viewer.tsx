@@ -1,3 +1,6 @@
+import { ArrowLeft, CheckCircle2, Code, Download, FileText, Mail, Monitor, Paperclip, Smartphone, Tablet, Trash2 } from 'lucide-react';
+import type { ComponentType } from 'react';
+import { useEffect, useState } from 'react';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -15,12 +18,9 @@ import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, CheckCircle2, Code, Download, FileText, Mail, Monitor, Paperclip, Smartphone, Tablet, Trash2 } from 'lucide-react';
-import type { ComponentType } from 'react';
-import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 import { EmailAnalysis } from './email-analysis';
 import { HeadersView } from './headers-view';
-import { cn } from '@/lib/utils';
 
 interface Email {
     id: string;
